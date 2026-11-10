@@ -29,25 +29,25 @@ export default function TableOfContents({ toc = [] }) {
   if (!toc.length) return null;
 
   return (
-    <nav className="p-4 rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur sticky top-24">
-      <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-800 text-xs font-semibold uppercase tracking-wider text-slate-400">
-        <List className="w-4 h-4 text-indigo-400" />
-        <span>Table of Contents</span>
+    <nav className="p-4 rounded-xl border border-[#24221e] bg-[#141412] sticky top-24">
+      <div className="flex items-center gap-2 pb-3 mb-3 border-b border-[#22201b] text-[11px] font-semibold uppercase tracking-wider text-[#8f8879]">
+        <List className="w-3.5 h-3.5 text-[#ded8cb]" />
+        <span>Contents</span>
       </div>
-      <ul className="space-y-1 text-sm max-h-[70vh] overflow-y-auto pr-2">
+      <ul className="space-y-1 text-xs max-h-[70vh] overflow-y-auto pr-1">
         {toc.map((item) => {
           const isActive = activeId === item.id;
           return (
             <li
               key={item.id}
-              style={{ paddingLeft: `${(item.level - 1) * 0.75}rem` }}
+              style={{ paddingLeft: `${(item.level - 1) * 0.65}rem` }}
             >
               <a
                 href={`#${item.id}`}
                 className={`block py-1 px-2 rounded-md transition-all text-xs truncate ${
                   isActive
-                    ? 'text-indigo-400 font-semibold bg-indigo-500/10'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                    ? 'text-[#f5f3ec] font-semibold bg-[#201e1a] border-l-2 border-[#ede8df]'
+                    : 'text-[#8f8879] hover:text-[#ede8df] hover:bg-[#191715]'
                 }`}
               >
                 {item.text}

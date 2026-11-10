@@ -3,7 +3,6 @@ import confetti from 'canvas-confetti';
 import { 
   CheckCircle2, 
   XCircle, 
-  HelpCircle, 
   ArrowRight, 
   RotateCcw, 
   Award, 
@@ -42,9 +41,10 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
 
       if (res.score >= 70) {
         confetti({
-          particleCount: 80,
-          spread: 60,
+          particleCount: 50,
+          spread: 45,
           origin: { y: 0.6 },
+          colors: ['#ede8df', '#d4af37', '#8f8879'],
         });
       }
 
@@ -69,25 +69,24 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
 
   if (questions.length === 0) {
     return (
-      <div className="p-12 text-center rounded-2xl border border-slate-800 bg-slate-900/40">
-        <HelpCircle className="w-12 h-12 text-slate-500 mx-auto mb-3" />
-        <h3 className="text-lg font-semibold text-slate-300">No questions available yet</h3>
-        <p className="text-slate-400 text-sm mt-1">
-          Add questions to <code className="text-indigo-400 font-mono">{topicSlug}.questions.json</code> to practice here!
+      <div className="p-12 text-center rounded-2xl border border-[#24221e] bg-[#141412]">
+        <h3 className="text-sm font-semibold text-[#ede8df]">No questions available yet</h3>
+        <p className="text-[#8f8879] text-xs mt-1">
+          Add companion questions to <code className="text-[#ded8cb] font-mono">{topicSlug}.questions.json</code>
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Quiz Header & Score Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl border border-[#24221e] bg-[#141412]">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">Interactive Practice</span>
-          <h2 className="text-xl font-bold text-white mt-0.5">{topicTitle}</h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Answer the questions below to test your understanding and update your mastery streak.
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#a8a192]">Practice & Self-Test</span>
+          <h2 className="text-lg font-bold text-[#f5f3ec] mt-0.5">{topicTitle}</h2>
+          <p className="text-xs text-[#8f8879] mt-1">
+            Answer all questions to review your retention and update mastery stats.
           </p>
         </div>
 
@@ -95,33 +94,33 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
           <div className="flex items-center gap-3">
             <div className={`px-4 py-2 rounded-xl border flex items-center gap-2 ${
               evaluation.score >= 70 
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' 
-                : 'bg-amber-500/10 border-amber-500/30 text-amber-300'
+                ? 'bg-[#1b2016] border-[#38402c] text-[#d1ddbe]' 
+                : 'bg-[#221c15] border-[#3d3326] text-[#ded2ba]'
             }`}>
-              <Award className="w-5 h-5" />
+              <Award className="w-4 h-4" />
               <div className="text-left">
-                <div className="text-xs font-semibold uppercase">Score</div>
-                <div className="text-lg font-bold">{evaluation.score}% ({evaluation.correctCount}/{evaluation.totalQuestions})</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider">Score</div>
+                <div className="text-base font-bold">{evaluation.score}% ({evaluation.correctCount}/{evaluation.totalQuestions})</div>
               </div>
             </div>
             <button
               onClick={handleReset}
-              className="p-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+              className="p-2.5 rounded-xl border border-[#2e2a22] bg-[#1a1815] hover:bg-[#23201b] text-[#ded8cb] transition-colors cursor-pointer"
               title="Retry Practice"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
           </div>
         ) : (
-          <div className="text-xs text-slate-400 flex items-center gap-2 bg-slate-800/60 px-3 py-1.5 rounded-lg border border-slate-750">
+          <div className="text-xs text-[#8f8879] flex items-center gap-2 bg-[#1a1815] px-3 py-1.5 rounded-lg border border-[#2a2721]">
             <span>Progress:</span>
-            <span className="font-semibold text-slate-200">{totalAnswered} / {questions.length} answered</span>
+            <span className="font-semibold text-[#ded8cb]">{totalAnswered} / {questions.length} answered</span>
           </div>
         )}
       </div>
 
       {/* Question Cards List */}
-      <div className="space-y-6">
+      <div className="space-y-5">
         {questions.map((q, idx) => {
           const detail = evaluation?.details?.find(d => d.questionId === q.questionId);
           const isAnswered = selectedAnswers[q.questionId] !== undefined;
@@ -132,20 +131,20 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
               className={`p-6 rounded-2xl border transition-all ${
                 detail
                   ? detail.isCorrect
-                    ? 'border-emerald-500/40 bg-emerald-950/10'
-                    : 'border-rose-500/40 bg-rose-950/10'
+                    ? 'border-[#39422a] bg-[#141812]'
+                    : 'border-[#422c29] bg-[#181313]'
                   : isAnswered
-                  ? 'border-indigo-500/40 bg-slate-900/80 shadow-md shadow-indigo-500/5'
-                  : 'border-slate-800 bg-slate-900/40'
+                  ? 'border-[#38342a] bg-[#161513]'
+                  : 'border-[#24221e] bg-[#141412]'
               }`}
             >
               {/* Question Header */}
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2.5">
-                  <span className="h-6 w-6 rounded-lg bg-slate-800 border border-slate-700 text-xs font-bold text-slate-300 flex items-center justify-center">
+                  <span className="h-6 w-6 rounded-lg bg-[#1c1b18] border border-[#2e2a23] text-xs font-bold text-[#ded8cb] flex items-center justify-center">
                     {idx + 1}
                   </span>
-                  <span className="text-xs font-medium uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700/60">
+                  <span className="text-[11px] font-medium uppercase px-2 py-0.5 rounded bg-[#1c1b18] text-[#8f8879] border border-[#2a2721]">
                     {q.difficulty || 'Question'}
                   </span>
                 </div>
@@ -153,7 +152,7 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
                 {q.hint && !evaluation && (
                   <button
                     onClick={() => toggleHint(q.questionId)}
-                    className="flex items-center gap-1.5 text-xs text-amber-400/90 hover:text-amber-300 transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 text-xs text-[#b8ad96] hover:text-[#ede8df] transition-colors cursor-pointer"
                   >
                     <Lightbulb className="w-3.5 h-3.5" />
                     <span>{showHints[q.questionId] ? 'Hide Hint' : 'Show Hint'}</span>
@@ -162,42 +161,42 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
               </div>
 
               {/* Prompt */}
-              <h3 className="text-base font-semibold text-slate-100 mb-4 leading-relaxed">
+              <h3 className="text-sm sm:text-base font-semibold text-[#f5f3ec] mb-4 leading-relaxed">
                 {q.prompt}
               </h3>
 
               {/* Hint Box */}
               {showHints[q.questionId] && !evaluation && (
-                <div className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200 flex items-start gap-2">
-                  <Lightbulb className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
+                <div className="mb-4 p-3 rounded-xl bg-[#1b1915] border border-[#332e24] text-xs text-[#cdc5b3] flex items-start gap-2">
+                  <Lightbulb className="w-4 h-4 shrink-0 text-[#d4af37] mt-0.5" />
                   <div>
-                    <span className="font-semibold">Hint: </span>
+                    <span className="font-semibold text-[#ded8cb]">Hint: </span>
                     <span>{q.hint}</span>
                   </div>
                 </div>
               )}
 
               {/* Options */}
-              <div className="space-y-2.5">
+              <div className="space-y-2">
                 {q.options.map((opt) => {
                   const isSelected = selectedAnswers[q.questionId] === opt.id;
                   
-                  let optionStyle = 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80 hover:border-slate-700 text-slate-300';
+                  let optionStyle = 'border-[#24221e] bg-[#171614] hover:bg-[#1e1c19] hover:border-[#38342c] text-[#cdc7bb]';
                   let icon = null;
 
                   if (detail) {
                     const isOptionCorrect = detail.correctOptionId === opt.id;
                     if (isOptionCorrect) {
-                      optionStyle = 'border-emerald-500 bg-emerald-500/15 text-emerald-200 font-semibold';
-                      icon = <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 ml-auto" />;
+                      optionStyle = 'border-[#414b2f] bg-[#192015] text-[#d6e2c3] font-semibold';
+                      icon = <CheckCircle2 className="w-4 h-4 text-[#bad09d] shrink-0 ml-auto" />;
                     } else if (isSelected && !detail.isCorrect) {
-                      optionStyle = 'border-rose-500 bg-rose-500/15 text-rose-200 font-medium';
-                      icon = <XCircle className="w-4 h-4 text-rose-400 shrink-0 ml-auto" />;
+                      optionStyle = 'border-[#4e2f2a] bg-[#221615] text-[#e0b6b0] font-medium';
+                      icon = <XCircle className="w-4 h-4 text-[#d9958d] shrink-0 ml-auto" />;
                     } else {
-                      optionStyle = 'border-slate-800/60 bg-slate-900/30 text-slate-500 opacity-60';
+                      optionStyle = 'border-[#201e1a] bg-[#121110] text-[#635e53] opacity-50';
                     }
                   } else if (isSelected) {
-                    optionStyle = 'border-indigo-500 bg-indigo-500/15 text-white font-medium ring-1 ring-indigo-500';
+                    optionStyle = 'border-[#ede8df] bg-[#22201b] text-[#f5f3ec] font-medium ring-1 ring-[#ede8df]/30';
                   }
 
                   return (
@@ -205,11 +204,11 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
                       key={opt.id}
                       onClick={() => handleSelectOption(q.questionId, opt.id)}
                       disabled={Boolean(evaluation)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 text-sm ${optionStyle}`}
+                      className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 text-xs sm:text-sm cursor-pointer ${optionStyle}`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className={`h-5 w-5 rounded-md flex items-center justify-center text-xs font-semibold ${
-                          isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400'
+                        <span className={`h-5 w-5 rounded flex items-center justify-center text-[11px] font-bold ${
+                          isSelected ? 'bg-[#ede8df] text-[#141311]' : 'bg-[#1f1d19] text-[#8f8879] border border-[#2e2a22]'
                         }`}>
                           {opt.id.toUpperCase()}
                         </span>
@@ -223,16 +222,16 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
 
               {/* Explanation (Shown after evaluation) */}
               {detail && (
-                <div className={`mt-5 p-4 rounded-xl border text-sm leading-relaxed ${
+                <div className={`mt-4 p-4 rounded-xl border text-xs sm:text-sm leading-relaxed ${
                   detail.isCorrect
-                    ? 'border-emerald-500/30 bg-emerald-950/20 text-emerald-200'
-                    : 'border-amber-500/30 bg-amber-950/20 text-amber-200'
+                    ? 'border-[#39422a] bg-[#171d13] text-[#cfdec0]'
+                    : 'border-[#383226] bg-[#191714] text-[#d6cdb8]'
                 }`}>
-                  <div className="flex items-center gap-1.5 font-bold mb-1 text-xs uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-1.5 font-bold mb-1 text-[11px] uppercase tracking-wider text-[#ded8cb]">
+                    <Sparkles className="w-3 h-3 text-[#ded8cb]" />
                     <span>Explanation</span>
                   </div>
-                  <p className="text-slate-300 text-xs sm:text-sm">
+                  <p className="text-[#cdc7bb] text-xs leading-relaxed">
                     {detail.explanation || 'No explanation provided.'}
                   </p>
                 </div>
@@ -243,12 +242,12 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
       </div>
 
       {/* Bottom Action Footer */}
-      <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl border border-[#24221e] bg-[#141412] flex flex-col sm:flex-row items-center justify-between gap-4">
         {evaluation ? (
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
               onClick={handleReset}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm transition-colors border border-slate-700"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1b1a17] hover:bg-[#23211d] text-[#ded8cb] font-medium text-xs sm:text-sm transition-colors border border-[#2d2a23] cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Retry Assessment</span>
@@ -256,7 +255,7 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
             {onBackToStudy && (
               <button
                 onClick={onBackToStudy}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors shadow-lg shadow-indigo-600/20"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#ede8df] hover:bg-[#ded7c9] text-[#141311] font-semibold text-xs sm:text-sm transition-colors shadow-sm cursor-pointer"
               >
                 <BookOpen className="w-4 h-4" />
                 <span>Return to Notes</span>
@@ -265,21 +264,21 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
           </div>
         ) : (
           <>
-            <div className="text-xs text-slate-400">
+            <div className="text-xs text-[#8f8879]">
               {isAllAnswered ? (
-                <span className="text-emerald-400 font-medium">All questions answered! Ready to submit.</span>
+                <span className="text-[#ded8cb] font-medium">All questions answered. Ready to submit!</span>
               ) : (
-                <span>Please select an answer for all questions to evaluate.</span>
+                <span>Select an answer for each question before evaluating.</span>
               )}
             </div>
 
             <button
               onClick={handleSubmit}
               disabled={isSubmitting || totalAnswered === 0}
-              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-white font-semibold text-sm transition-all shadow-lg ${
+              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 isAllAnswered
-                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-indigo-500/25 cursor-pointer'
-                  : 'bg-slate-800 text-slate-400 border border-slate-700 cursor-pointer hover:bg-slate-750'
+                  ? 'bg-[#ede8df] hover:bg-[#ded7c9] text-[#141311] shadow-sm'
+                  : 'bg-[#1b1916] text-[#706a5e] border border-[#26231d]'
               }`}
             >
               <span>{isSubmitting ? 'Evaluating...' : 'Submit Assessment'}</span>

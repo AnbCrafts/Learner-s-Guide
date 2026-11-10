@@ -21,49 +21,49 @@ export default function Navbar({ activeView, setActiveView, streak = 0, onSyncCo
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[#24221e] bg-[#0d0d0c]/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
         <div 
           onClick={() => setActiveView('dashboard')}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-            <BookOpen className="w-5 h-5 text-white" />
+          <div className="h-9 w-9 rounded-lg bg-[#1a1916] border border-[#332f28] flex items-center justify-center text-[#ded8cb] group-hover:border-[#4d483e] transition-colors">
+            <BookOpen className="w-4 h-4 text-[#eae5d8]" />
           </div>
-          <div>
-            <span className="text-lg font-bold bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
+          <div className="flex items-center gap-2">
+            <span className="text-base font-bold text-[#f5f3ec] tracking-tight">
               LearnersGuide
             </span>
-            <span className="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span className="hidden sm:inline-block text-[11px] font-medium px-2 py-0.5 rounded bg-[#1c1b18] text-[#a8a192] border border-[#2d2a24]">
               MERN
             </span>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1 sm:gap-2">
+        <nav className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={() => setActiveView('dashboard')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
               activeView === 'dashboard'
-                ? 'bg-slate-800 text-white shadow-inner'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                ? 'bg-[#201e1a] text-[#f5f3ec] border border-[#38342c]'
+                : 'text-[#9c9586] hover:text-[#ede8df] hover:bg-[#171613]'
             }`}
           >
-            <LayoutDashboard className="w-4 h-4" />
-            <span className="hidden md:inline">Dashboard</span>
+            <LayoutDashboard className="w-3.5 h-3.5" />
+            <span>Dashboard</span>
           </button>
 
           <button
             onClick={() => setActiveView('catalog')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
               activeView === 'catalog' || activeView === 'study'
-                ? 'bg-slate-800 text-white shadow-inner'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                ? 'bg-[#201e1a] text-[#f5f3ec] border border-[#38342c]'
+                : 'text-[#9c9586] hover:text-[#ede8df] hover:bg-[#171613]'
             }`}
           >
-            <Compass className="w-4 h-4" />
+            <Compass className="w-3.5 h-3.5" />
             <span>Study Guides</span>
           </button>
         </nav>
@@ -75,25 +75,25 @@ export default function Navbar({ activeView, setActiveView, streak = 0, onSyncCo
             onClick={handleSync}
             disabled={isSyncing}
             title="Scan & Sync .md files from content folder"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-slate-800 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[#9c9586] hover:text-[#ede8df] hover:bg-[#1a1916] border border-[#2b2822] transition-colors cursor-pointer"
           >
             {syncedMsg ? (
               <>
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-emerald-400 hidden sm:inline">Synced</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#b8b394]" />
+                <span className="text-[#dcd7be] hidden sm:inline">Synced</span>
               </>
             ) : (
               <>
-                <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin text-indigo-400' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin text-[#dcd7be]' : ''}`} />
                 <span className="hidden sm:inline">{isSyncing ? 'Syncing...' : 'Sync Notes'}</span>
               </>
             )}
           </button>
 
           {/* Streak Indicator */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold shadow-sm">
-            <Flame className="w-4 h-4 fill-amber-400 text-amber-400" />
-            <span>{streak} {streak === 1 ? 'day' : 'days'} streak</span>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1916] border border-[#332f27] text-[#ded8cb] text-xs font-medium">
+            <Flame className="w-3.5 h-3.5 text-[#d4af37]" />
+            <span>{streak} {streak === 1 ? 'day' : 'days'}</span>
           </div>
         </div>
       </div>
