@@ -81,18 +81,18 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#d6cfbe]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#181715]"></div>
       </div>
     );
   }
 
   if (!topic) {
     return (
-      <div className="p-12 text-center">
-        <h2 className="text-base font-bold text-[#f5f3ec]">Topic not found</h2>
+      <div className="p-12 text-center bg-[#ffffff] border border-[#dfd8cb] rounded-2xl">
+        <h2 className="text-base font-bold text-[#141311]">Topic not found</h2>
         <button
           onClick={onBack}
-          className="mt-4 px-4 py-2 rounded-xl bg-[#ede8df] text-[#141311] font-semibold text-xs cursor-pointer"
+          className="mt-4 px-4 py-2 rounded-xl bg-[#181715] text-[#ffffff] font-bold text-xs cursor-pointer"
         >
           Back to Guides
         </button>
@@ -101,29 +101,29 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
   }
 
   return (
-    <div className="space-y-6 py-2">
+    <div className="space-y-6">
       {/* Top Navigation & Status Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#24221e]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#dfd8cb]">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="p-2 rounded-xl border border-[#2b2823] bg-[#161513] hover:bg-[#201e1a] text-[#8f8879] hover:text-[#ede8df] transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl border border-[#dfd8cb] bg-[#ffffff] hover:bg-[#f5f2ea] text-[#181715] transition-colors cursor-pointer shadow-2xs"
             title="Back to Guides"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#1c1b18] text-[#a8a192] border border-[#2b2822]">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#ede7dc] text-[#544f43] border border-[#dbd3c3]">
                 {topic.category}
               </span>
-              <span className="text-xs text-[#544f45]">•</span>
-              <span className="text-xs text-[#8f8879] flex items-center gap-1">
-                <Clock className="w-3 h-3" />
+              <span className="text-xs text-[#a8a192]">•</span>
+              <span className="text-xs text-[#6b6455] flex items-center gap-1 font-medium">
+                <Clock className="w-3.5 h-3.5" />
                 {topic.estimatedMinutes} min read
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-[#f5f3ec] mt-1 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-black text-[#141311] mt-1 tracking-tight">
               {topic.title}
             </h1>
           </div>
@@ -133,10 +133,10 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
         <div className="flex items-center gap-2 self-stretch sm:self-auto justify-end">
           <button
             onClick={handleToggleBookmark}
-            className={`p-2 rounded-xl border transition-colors cursor-pointer ${
+            className={`p-2.5 rounded-xl border transition-all cursor-pointer shadow-2xs ${
               isBookmarked
-                ? 'border-[#453e30] bg-[#221f18] text-[#ded8cb]'
-                : 'border-[#292621] bg-[#161513] text-[#7d776a] hover:text-[#ede8df]'
+                ? 'border-[#181715] bg-[#181715] text-[#ffffff]'
+                : 'border-[#dfd8cb] bg-[#ffffff] text-[#6b6455] hover:text-[#181715] hover:bg-[#f5f2ea]'
             }`}
             title={isBookmarked ? 'Bookmarked' : 'Add to bookmarks'}
           >
@@ -145,41 +145,41 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
 
           <button
             onClick={handleToggleComplete}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer shadow-2xs ${
               isCompleted
-                ? 'border-[#3f3b30] bg-[#1f1d18] text-[#ded8cb]'
-                : 'border-[#292621] bg-[#161513] text-[#8f8879] hover:text-[#ede8df] hover:border-[#38342b]'
+                ? 'border-[#234215] bg-[#edf5e6] text-[#234215]'
+                : 'border-[#dfd8cb] bg-[#ffffff] text-[#181715] hover:bg-[#f5f2ea]'
             }`}
           >
-            <CheckCircle2 className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-4 h-4" />
             <span>{isCompleted ? 'Completed' : 'Mark Complete'}</span>
           </button>
         </div>
       </div>
 
       {/* Mode Switch Tabs (Notes vs Practice) */}
-      <div className="flex items-center border-b border-[#24221e]">
+      <div className="flex items-center border-b border-[#dfd8cb]">
         <button
           onClick={() => setActiveTab('study')}
-          className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
             activeTab === 'study'
-              ? 'border-[#ede8df] text-[#f5f3ec] bg-[#161513]'
-              : 'border-transparent text-[#8f8879] hover:text-[#ede8df]'
+              ? 'border-[#181715] text-[#181715] bg-[#ffffff] rounded-t-lg'
+              : 'border-transparent text-[#6b6455] hover:text-[#181715]'
           }`}
         >
-          <BookOpen className="w-4 h-4 text-[#ded8cb]" />
+          <BookOpen className="w-4 h-4" />
           <span>Study Notes</span>
         </button>
 
         <button
           onClick={() => setActiveTab('practice')}
-          className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
             activeTab === 'practice'
-              ? 'border-[#ede8df] text-[#f5f3ec] bg-[#161513]'
-              : 'border-transparent text-[#8f8879] hover:text-[#ede8df]'
+              ? 'border-[#181715] text-[#181715] bg-[#ffffff] rounded-t-lg'
+              : 'border-transparent text-[#6b6455] hover:text-[#181715]'
           }`}
         >
-          <Award className="w-4 h-4 text-[#ded8cb]" />
+          <Award className="w-4 h-4" />
           <span>Practice Questions ({questions.length})</span>
         </button>
       </div>
@@ -188,17 +188,17 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
       {activeTab === 'study' ? (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Markdown Body */}
-          <div className="lg:col-span-3 bg-[#131311] p-6 sm:p-8 rounded-2xl border border-[#24221e]">
+          <div className="lg:col-span-3 bg-[#ffffff] p-6 sm:p-8 rounded-2xl border border-[#dfd8cb] shadow-2xs">
             <MarkdownViewer content={topic.content} />
 
             {/* Bottom transition card to take the quiz */}
-            <div className="mt-12 pt-8 border-t border-[#24221e] flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-[#181715] border border-[#2c2923]">
+            <div className="mt-12 pt-8 border-t border-[#ede7dc] flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-[#faf8f4] border border-[#e5dfd3]">
               <div>
-                <h4 className="text-sm font-bold text-[#f5f3ec] flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#ded8cb]" />
+                <h4 className="text-sm font-bold text-[#141311] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#181715]" />
                   Ready to test your recall?
                 </h4>
-                <p className="text-xs text-[#8f8879] mt-1">
+                <p className="text-xs text-[#6b6455] mt-1">
                   Practice with {questions.length} questions covering key patterns and edge cases.
                 </p>
               </div>
@@ -208,7 +208,7 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
                   setActiveTab('practice');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#ede8df] hover:bg-[#ded7c9] text-[#141311] font-semibold text-xs transition-all shadow-sm shrink-0 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#181715] hover:bg-[#2b2925] text-[#ffffff] font-bold text-xs transition-all shadow-sm shrink-0 cursor-pointer"
               >
                 <span>Start Practice Quiz</span>
                 <ArrowRight className="w-3.5 h-3.5" />

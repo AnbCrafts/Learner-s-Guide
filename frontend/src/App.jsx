@@ -38,7 +38,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d0c] text-[#ede8df] flex flex-col font-sans selection:bg-[#38352e] selection:text-[#f5f3ec]">
+    <div className="min-h-screen bg-[#f5f2ea] text-[#1a1917] flex flex-col font-sans selection:bg-[#e4ddce] selection:text-[#141311]">
       <Navbar
         activeView={activeView}
         setActiveView={setActiveView}
@@ -46,11 +46,11 @@ export default function App() {
         onSyncComplete={loadData}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-[70vh] gap-3">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#d6cfbe]"></div>
-            <p className="text-xs text-[#8f8879]">Loading study guides...</p>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#181715]"></div>
+            <p className="text-xs text-[#706a5e]">Loading study guides...</p>
           </div>
         ) : (
           <>
@@ -80,7 +80,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="border-t border-[#1e1d1a] py-6 text-center text-xs text-[#756f62]">
+      <footer className="border-t border-[#dfd8cb] bg-[#ede7dc] py-6 text-center text-xs text-[#706a5e]">
         <div className="max-w-7xl mx-auto px-4">
           LearnersGuide • Markdown Study Materials & Practice Record
         </div>

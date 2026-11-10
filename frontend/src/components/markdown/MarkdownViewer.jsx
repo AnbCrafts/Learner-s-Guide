@@ -19,21 +19,21 @@ function CodeBlock({ children, className, ...props }) {
   };
 
   if (!language && !className) {
-    return <code className="bg-[#191816] text-[#ded8cb] border border-[#2b2924] px-1.5 py-0.5 rounded text-xs font-mono" {...props}>{children}</code>;
+    return <code className="bg-[#ede7dc] text-[#181715] border border-[#d8d1c2] px-1.5 py-0.5 rounded text-xs font-mono font-semibold" {...props}>{children}</code>;
   }
 
   return (
-    <div className="relative my-4 rounded-xl border border-[#24221e] bg-[#10100e] overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-[#161513] border-b border-[#24221e] text-xs text-[#8f8879] font-mono">
-        <span className="uppercase tracking-wider font-semibold text-[#ded8cb] text-[11px]">{language || 'code'}</span>
+    <div className="relative my-4 rounded-xl border border-[#2b2823] bg-[#181715] overflow-hidden shadow-2xs">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#22201c] border-b border-[#2e2a24] text-xs text-[#a8a192] font-mono">
+        <span className="uppercase tracking-wider font-bold text-[#eae5d8] text-[11px]">{language || 'code'}</span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2 py-1 rounded bg-[#201e1a] hover:bg-[#2b2823] text-[#ded8cb] transition-colors cursor-pointer"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#2e2b24] hover:bg-[#3d3930] text-[#eae5d8] transition-colors cursor-pointer text-xs"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-[#bad09d]" />
-              <span className="text-[#bad09d] text-xs">Copied</span>
+              <Check className="w-3.5 h-3.5 text-[#9ece6a]" />
+              <span className="text-[#9ece6a] text-xs font-bold">Copied</span>
             </>
           ) : (
             <>
@@ -43,7 +43,7 @@ function CodeBlock({ children, className, ...props }) {
           )}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#dfdbd2]">
+      <div className="p-4 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#ede7dc]">
         <code className={className} {...props}>
           {children}
         </code>
@@ -80,7 +80,7 @@ export default function MarkdownViewer({ content }) {
           },
           code: CodeBlock,
           table: ({ children }) => (
-            <div className="overflow-x-auto my-4 rounded-xl border border-[#24221e]">
+            <div className="overflow-x-auto my-4 rounded-xl border border-[#dfd8cb] shadow-2xs">
               <table className="w-full">{children}</table>
             </div>
           ),
@@ -96,29 +96,29 @@ export default function MarkdownViewer({ content }) {
 
             if (isNote || isTip || isImportant || isWarning) {
               let Icon = Info;
-              let borderColor = 'border-[#332f27] bg-[#181613] text-[#ded8cb]';
+              let borderColor = 'border-[#dfd8cb] bg-[#faf7f0] text-[#2b271e]';
               let title = 'Note';
 
               if (isTip) {
                 Icon = Lightbulb;
-                borderColor = 'border-[#353c29] bg-[#161a14] text-[#d6e0c7]';
+                borderColor = 'border-[#c5dcb3] bg-[#f4f9f0] text-[#1e3b12]';
                 title = 'Tip';
               } else if (isImportant) {
                 Icon = AlertCircle;
-                borderColor = 'border-[#3d382d] bg-[#1b1915] text-[#ded8cb]';
+                borderColor = 'border-[#dfd8cb] bg-[#f7f4ed] text-[#24211a]';
                 title = 'Important';
               } else if (isWarning) {
                 Icon = AlertTriangle;
-                borderColor = 'border-[#423328] bg-[#1e1714] text-[#dfc5b7]';
+                borderColor = 'border-[#eccdc0] bg-[#fdf6f2] text-[#542714]';
                 title = 'Warning';
               }
 
               return (
-                <div className={`my-4 p-4 rounded-xl border ${borderColor} flex gap-3 text-xs sm:text-sm leading-relaxed`}>
+                <div className={`my-4 p-4 rounded-xl border ${borderColor} flex gap-3 text-xs sm:text-sm leading-relaxed shadow-2xs`}>
                   <Icon className="w-4 h-4 shrink-0 mt-0.5 opacity-90" />
                   <div className="space-y-1">
-                    <span className="font-semibold uppercase tracking-wider text-[11px] block opacity-90">{title}</span>
-                    <div className="text-[#cdc7bb]">
+                    <span className="font-bold uppercase tracking-wider text-[11px] block opacity-90">{title}</span>
+                    <div className="text-[#38342d]">
                       {children}
                     </div>
                   </div>

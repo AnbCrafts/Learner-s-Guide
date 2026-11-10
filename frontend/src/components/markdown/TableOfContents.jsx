@@ -29,9 +29,9 @@ export default function TableOfContents({ toc = [] }) {
   if (!toc.length) return null;
 
   return (
-    <nav className="p-4 rounded-xl border border-[#24221e] bg-[#141412] sticky top-24">
-      <div className="flex items-center gap-2 pb-3 mb-3 border-b border-[#22201b] text-[11px] font-semibold uppercase tracking-wider text-[#8f8879]">
-        <List className="w-3.5 h-3.5 text-[#ded8cb]" />
+    <nav className="p-4 rounded-2xl border border-[#dfd8cb] bg-[#ffffff] sticky top-24 shadow-2xs">
+      <div className="flex items-center gap-2 pb-3 mb-3 border-b border-[#ede7dc] text-[11px] font-bold uppercase tracking-wider text-[#6b6455]">
+        <List className="w-3.5 h-3.5 text-[#181715]" />
         <span>Contents</span>
       </div>
       <ul className="space-y-1 text-xs max-h-[70vh] overflow-y-auto pr-1">
@@ -44,10 +44,10 @@ export default function TableOfContents({ toc = [] }) {
             >
               <a
                 href={`#${item.id}`}
-                className={`block py-1 px-2 rounded-md transition-all text-xs truncate ${
+                className={`block py-1.5 px-2 rounded-md transition-all text-xs truncate ${
                   isActive
-                    ? 'text-[#f5f3ec] font-semibold bg-[#201e1a] border-l-2 border-[#ede8df]'
-                    : 'text-[#8f8879] hover:text-[#ede8df] hover:bg-[#191715]'
+                    ? 'text-[#141311] font-bold bg-[#f5f2ea] border-l-2 border-[#181715]'
+                    : 'text-[#6b6455] hover:text-[#181715] hover:bg-[#faf8f4]'
                 }`}
               >
                 {item.text}
