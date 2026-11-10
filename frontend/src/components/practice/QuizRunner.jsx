@@ -8,7 +8,8 @@ import {
   RotateCcw, 
   Award, 
   Sparkles,
-  BookOpen
+  BookOpen,
+  Lightbulb
 } from 'lucide-react';
 import { evaluateQuiz } from '../../api/client';
 
@@ -152,10 +153,10 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
                 {q.hint && !evaluation && (
                   <button
                     onClick={() => toggleHint(q.questionId)}
-                    className="flex items-center gap-1 text-xs text-amber-400/80 hover:text-amber-300 transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-amber-400/90 hover:text-amber-300 transition-colors cursor-pointer"
                   >
-                    <HelpCircle className="w-3.5 h-3.5" />
-                    <span>{showHints[q.questionId] ? 'Hide Hint' : 'Hint'}</span>
+                    <Lightbulb className="w-3.5 h-3.5" />
+                    <span>{showHints[q.questionId] ? 'Hide Hint' : 'Show Hint'}</span>
                   </button>
                 )}
               </div>
@@ -167,8 +168,12 @@ export default function QuizRunner({ topicSlug, topicTitle, questions = [], onCo
 
               {/* Hint Box */}
               {showHints[q.questionId] && !evaluation && (
-                <div className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">
-                  <span className="font-semibold">💡 Hint: </span>{q.hint}
+                <div className="mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200 flex items-start gap-2">
+                  <Lightbulb className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
+                  <div>
+                    <span className="font-semibold">Hint: </span>
+                    <span>{q.hint}</span>
+                  </div>
                 </div>
               )}
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   ArrowLeft, 
+  ArrowRight,
   BookOpen, 
   CheckCircle2, 
   Clock, 
@@ -208,9 +209,10 @@ export default function StudyPage({ slug, onBack, onProgressUpdated }) {
                   setActiveTab('practice');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/25 shrink-0 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/25 shrink-0 cursor-pointer"
               >
-                Start Practice Quiz →
+                <span>Start Practice Quiz</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>

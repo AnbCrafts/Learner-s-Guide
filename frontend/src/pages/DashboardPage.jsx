@@ -9,7 +9,8 @@ import {
   TrendingUp, 
   AlertTriangle,
   ArrowRight,
-  Layers
+  Layers,
+  Sparkles
 } from 'lucide-react';
 
 export default function DashboardPage({ analytics, onSelectTopic, onNavigateCatalog }) {
@@ -45,7 +46,7 @@ export default function DashboardPage({ analytics, onSelectTopic, onNavigateCata
       <div className="relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/60 via-slate-900/80 to-slate-950 p-6 sm:p-8">
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-3">
-            <SparklesIcon className="w-3.5 h-3.5 text-indigo-400" />
+            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
             <span>Welcome back to your study guide</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -163,9 +164,10 @@ export default function DashboardPage({ analytics, onSelectTopic, onNavigateCata
             </div>
             <button
               onClick={onNavigateCatalog}
-              className="text-xs text-indigo-400 hover:text-indigo-300 font-medium"
+              className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 font-medium cursor-pointer"
             >
-              View All Topics →
+              <span>View All Topics</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -234,13 +236,5 @@ export default function DashboardPage({ analytics, onSelectTopic, onNavigateCata
         </div>
       </div>
     </div>
-  );
-}
-
-function SparklesIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-    </svg>
   );
 }
