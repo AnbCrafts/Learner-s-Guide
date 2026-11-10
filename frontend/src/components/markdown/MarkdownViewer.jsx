@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
 import { Copy, Check, Info, Lightbulb, AlertTriangle, AlertCircle } from 'lucide-react';
+
+function preprocessLaTeX(text) {
+  if (!text) return '';
+  // 1. Fix unescaped % inside LaTeX math mode ($...$ or $$...$$)
+  return text.replace(/(\$\$[\s\S]*?\$\$|\$[^$\n]+?\$)/g, (mathBlock) => {
+    return mathBlock.replace(/(?<!\\)%/g, '\\%');
+  });
+}
 
 function CodeBlock({ children, className, ...props }) {
   const [copied, setCopied] = useState(false);
@@ -60,10 +69,12 @@ function slugify(text) {
 }
 
 export default function MarkdownViewer({ content }) {
+  const processedContent = useMemo(() => preprocessLaTeX(content), [content]);
+
   return (
     <div className="markdown-body max-w-none">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeHighlight, rehypeKatex]}
         components={{
           h1: ({ children }) => {
@@ -130,7 +141,7 @@ export default function MarkdownViewer({ content }) {
           },
         }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   );
