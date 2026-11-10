@@ -1,0 +1,44 @@
+[
+  {
+    "id": "react_q1",
+    "prompt": "In React 18, if a click handler calls `setCount(count + 1)` three times in sequence when `count` is 0, what is the final rendered value?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "3", "isCorrect": false },
+      { "id": "b", "text": "1", "isCorrect": true },
+      { "id": "c", "text": "0", "isCorrect": false },
+      { "id": "d", "text": "It throws an infinite re-render error", "isCorrect": false }
+    ],
+    "explanation": "Because each `setCount(count + 1)` call in the same closure captures `count = 0`, all three calls schedule an update to 0 + 1 = 1. To get 3, use functional updates `setCount(prev => prev + 1)`.",
+    "hint": "What value did the variable `count` hold when the click function started executing?",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "react_q2",
+    "prompt": "When does the cleanup function returned from `useEffect` execute?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "Only when the browser window closes", "isCorrect": false },
+      { "id": "b", "text": "Immediately before the component unmounts, and before the effect re-runs due to dependency changes", "isCorrect": true },
+      { "id": "c", "text": "Immediately before the JSX renders", "isCorrect": false },
+      { "id": "d", "text": "Only when an error is thrown inside the effect", "isCorrect": false }
+    ],
+    "explanation": "React runs the cleanup function to clean up the previous effect's resources whenever the effect is about to re-run with new dependencies, as well as when the component unmounts.",
+    "hint": "Think about subscription teardown when a user navigates away or changes props.",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "react_q3",
+    "prompt": "Why is an object or array declared directly in a component body risky when placed in a `useEffect` dependency array?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "Objects cannot be serialized by React", "isCorrect": false },
+      { "id": "b", "text": "A new object reference is created on every render, causing the effect to run on every render", "isCorrect": true },
+      { "id": "c", "text": "React throws a TypeError on non-primitive dependencies", "isCorrect": false },
+      { "id": "d", "text": "It prevents garbage collection of the DOM node", "isCorrect": false }
+    ],
+    "explanation": "React compares dependencies using `Object.is` (referential equality). Because `{}` !== `{}`, declaring a new object on each render causes the comparison to fail and triggers the effect infinitely unless memoized with `useMemo`.",
+    "hint": "How does JavaScript compare two object references?",
+    "difficulty": "Hard"
+  }
+]

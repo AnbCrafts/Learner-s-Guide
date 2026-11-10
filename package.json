@@ -1,0 +1,12 @@
+{
+  "name": "learnersguide-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LearnersGuide - Markdown-powered Study Guides, Practice Engine, and Progress Tracker",
+  "scripts": {
+    "start": "node backend/server.js",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  }
+}

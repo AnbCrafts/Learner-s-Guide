@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cache_q1",
+    "prompt": "In the Cache-Aside pattern, what happens when a read request results in a cache miss?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "An error is returned to the client immediately", "isCorrect": false },
+      { "id": "b", "text": "The cache automatically queries the database directly without app intervention", "isCorrect": false },
+      { "id": "c", "text": "The application reads from the DB, writes the value into cache, and returns it to the client", "isCorrect": true },
+      { "id": "d", "text": "The key is permanently marked as expired", "isCorrect": false }
+    ],
+    "explanation": "In Cache-Aside, the application logic is responsible for querying the database upon a miss and populating the cache so subsequent reads will hit.",
+    "hint": "Who orchestrates the read and populate steps in lazy loading?",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "cache_q2",
+    "prompt": "What is the primary risk associated with the Write-Behind (Write-Back) caching strategy?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "High write latency on every transaction", "isCorrect": false },
+      { "id": "b", "text": "Potential data loss if the cache fails before persisting changes to the database", "isCorrect": true },
+      { "id": "c", "text": "Cache stampede on every read", "isCorrect": false },
+      { "id": "d", "text": "Database deadlock on simple SELECT queries", "isCorrect": false }
+    ],
+    "explanation": "Because writes are acknowledged to the client as soon as they hit cache memory and only persisted to the database asynchronously later, an outage before persistence causes permanent data loss.",
+    "hint": "What happens if power is lost while data is only in RAM?",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "cache_q3",
+    "prompt": "Which technique effectively mitigates a Cache Stampede (Thundering Herd) when a hot key expires?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "Distributed mutex locking to ensure only one thread queries the database", "isCorrect": true },
+      { "id": "b", "text": "Disabling TTL expiration entirely", "isCorrect": false },
+      { "id": "c", "text": "Increasing the database connection pool limit to infinity", "isCorrect": false },
+      { "id": "d", "text": "Using FIFO eviction instead of LRU", "isCorrect": false }
+    ],
+    "explanation": "A distributed lock (such as via Redis SETNX) allows only a single worker to perform the database query and update the cache, while other requests either wait or read the stale cached copy.",
+    "hint": "How do you coordinate many concurrent workers so only one does the heavy lifting?",
+    "difficulty": "Hard"
+  }
+]

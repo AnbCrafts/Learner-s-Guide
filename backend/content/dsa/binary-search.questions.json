@@ -1,0 +1,58 @@
+[
+  {
+    "id": "bs_q1",
+    "prompt": "What is the worst-case time complexity of binary search on a sorted array of size $n$?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "O(1)", "isCorrect": false },
+      { "id": "b", "text": "O(log n)", "isCorrect": true },
+      { "id": "c", "text": "O(n)", "isCorrect": false },
+      { "id": "d", "text": "O(n log n)", "isCorrect": false }
+    ],
+    "explanation": "At each step, binary search eliminates half of the remaining elements. For an array of size n, it takes at most log2(n) steps to narrow the search space down to 1 element.",
+    "hint": "Think about how many times you can halve an array of size n before reaching size 1.",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "bs_q2",
+    "prompt": "Why is `mid = low + (high - low) / 2` preferred over `mid = (low + high) / 2` in typed languages like C++ or Java?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "It computes faster on the CPU ALU", "isCorrect": false },
+      { "id": "b", "text": "It prevents 32-bit signed integer overflow when low + high exceeds 2^31 - 1", "isCorrect": true },
+      { "id": "c", "text": "It avoids floating point rounding inaccuracies", "isCorrect": false },
+      { "id": "d", "text": "It ensures the midpoint rounds upward instead of downward", "isCorrect": false }
+    ],
+    "explanation": "If both `low` and `high` are close to the maximum integer limit (e.g. 2 * 10^9), their sum `(low + high)` will overflow to a negative number in 32-bit signed integers, causing out-of-bounds errors.",
+    "hint": "Consider what happens when both indices are very large numbers near 2 billion.",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "bs_q3",
+    "prompt": "In a sorted array with duplicates `[1, 2, 2, 2, 3, 5]`, which modified binary search strategy finds the *first occurrence* (lower bound) of target `2`?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "When arr[mid] == target, immediately return mid", "isCorrect": false },
+      { "id": "b", "text": "When arr[mid] == target, set low = mid + 1", "isCorrect": false },
+      { "id": "c", "text": "When arr[mid] == target, record mid and continue searching left with high = mid - 1", "isCorrect": true },
+      { "id": "d", "text": "Linear search backward from mid", "isCorrect": false }
+    ],
+    "explanation": "To find the first occurrence, when you encounter arr[mid] == target, you store mid as a candidate answer and set high = mid - 1 to check if another occurrence exists earlier in the array.",
+    "hint": "If you want the earliest occurrence, where could it be relative to mid?",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "bs_q4",
+    "prompt": "Can binary search be applied to find the peak element in an unsorted array where adjacent elements are never equal?",
+    "type": "mcq",
+    "options": [
+      { "id": "a", "text": "Yes, because if arr[mid] < arr[mid + 1], a peak is guaranteed to exist on the right side", "isCorrect": true },
+      { "id": "b", "text": "No, binary search strictly requires the entire array to be sorted", "isCorrect": false },
+      { "id": "c", "text": "Only if the array size is a power of 2", "isCorrect": false },
+      { "id": "d", "text": "Only if we sort the array first in O(n log n)", "isCorrect": false }
+    ],
+    "explanation": "Binary search works on any space where you can discard half of the candidates. If arr[mid] < arr[mid + 1], then following the upward slope guarantees at least one local peak must exist on the right.",
+    "hint": "Think about mountain climbing: if the path is ascending to your right, will there be a summit on the right?",
+    "difficulty": "Hard"
+  }
+]
