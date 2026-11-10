@@ -73,16 +73,35 @@ export async function syncContent() {
     const pathParts = relativePath.split('/');
     const fileName = path.basename(filePath, '.md');
 
-    // Default category to folder name if available, e.g. "dsa" -> "DSA"
-    const folderCategory = pathParts.length > 1 ? pathParts[0] : 'General';
-    const formattedCategory = folderCategory
-      .split('-')
-      .map(s => s.charAt(0).toUpperCase() + s.slice(1))
-      .join(' ');
+    // Extract first H1 heading if no title in frontmatter
+    let extractedTitle = null;
+    const h1Match = parsed.content.match(/^#\s+(.+)$/m);
+    if (h1Match) {
+      extractedTitle = h1Match[1].trim().replace(/[*_`]/g, '');
+    }
 
-    const slug = parsed.data.slug || fileName;
-    const title = parsed.data.title || fileName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    const category = parsed.data.category || formattedCategory;
+    // Default category to folder name if available, e.g. "aptitude" -> "Aptitude", "coding" -> "Coding"
+    let folderCategory = 'General';
+    if (pathParts.length > 1) {
+      folderCategory = pathParts[0]
+        .replace(/^\d+[-_]/, '')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase());
+    } else if (fileName.includes('tcs') || fileName.includes('plan')) {
+      folderCategory = 'Strategy & Plans';
+    }
+
+    const slug = (parsed.data.slug || fileName)
+      .toLowerCase()
+      .replace(/[_\s]+/g, '-')
+      .replace(/[^\w-]/g, '');
+
+    const title = parsed.data.title || extractedTitle || fileName
+      .replace(/^\d+[-_]/, '')
+      .replace(/[-_]/g, ' ')
+      .replace(/\b\w/g, l => l.toUpperCase());
+
+    const category = parsed.data.category || folderCategory;
     const difficulty = parsed.data.difficulty || 'Beginner';
     const tags = Array.isArray(parsed.data.tags) ? parsed.data.tags : [];
     const order = typeof parsed.data.order === 'number' ? parsed.data.order : 0;

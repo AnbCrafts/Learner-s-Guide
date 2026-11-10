@@ -18,6 +18,7 @@ frontend/node_modules/
 backend/node_modules/
 
 # Build artifacts
+*.exe
 frontend/dist/
 frontend/dist-ssr/
 *.local
